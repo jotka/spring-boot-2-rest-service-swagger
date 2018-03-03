@@ -82,6 +82,59 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.24.0</version>
+				<configuration>
+					<!--<registry>registry.hub.docker.com/jotka</registry>-->
+					<images>
+						<image>
+							<name>jotka/${artifactId}:${project.version}</name>
+							<alias>spring-boot-2-rest-service</alias>
+                            <build>
+                                <from>openjdk:latest</from>
+                                <assembly>
+                                    <descriptorRef>artifact</descriptorRef>
+                                </assembly>
+                                <cmd>java -jar maven/${artifactId}-${project.version}.jar</cmd>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8080:8080</port>
+                                </ports>
+                            </run>
+						</image>
+					</images>
+					<!--<authConfig>-->
+						<!--<username>ENTER YOUR DOCKER HUB USERNAME LIKE abhishek</username>-->
+						<!--<password>ENTER YOUR DOCKER HUB PASSWORD</password>-->
+					<!--</authConfig>-->
+				</configuration>
+				<executions>
+					<execution>
+						<id>start</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+							<goal>build</goal>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>push</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
