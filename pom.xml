@@ -95,7 +95,7 @@
 					<images>
 						<image>
 							<name>jotka/${artifactId}:${project.version}</name>
-							<alias>spring-boot-2-rest-service</alias>
+							<alias>${artifactId}</alias>
                             <build>
                                 <from>openjdk:latest</from>
                                 <assembly>
