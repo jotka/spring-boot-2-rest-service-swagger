@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "Details about the student. ")
-class Student {
+public class Student {
     @Id
     @GeneratedValue
     private Long id;

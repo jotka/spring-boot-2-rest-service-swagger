@@ -1,8 +1,6 @@
 package pl.finsys.example.student;
 
 import io.swagger.annotations.ApiOperation;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -10,9 +8,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 public class StudentResource {
@@ -24,19 +19,16 @@ public class StudentResource {
     }
 
     @GetMapping("/students")
+    @ApiOperation(value = "Find all students")
     public List<Student> retrieveAllStudents() {
         return studentRepository.findAll();
     }
 
     @GetMapping("/students/{id}")
-    @ApiOperation(value = "Find student by id", notes = "Also returns a link to retrieve all students with rel - all-students")
-    public Resource<Student> retrieveStudent(@PathVariable long id) {
+    @ApiOperation(value = "Find student by id")
+    public Student retrieveStudent(@PathVariable long id) {
         Optional<Student> student = studentRepository.findById(id);
-        Resource<Student> resource = new Resource<>(student.orElseThrow(() -> new StudentNotFoundException("id-" + id)));
-        ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllStudents());
-        resource.add(linkTo.withRel("all-students"));
-
-        return resource;
+        return student.orElseThrow(() -> new StudentNotFoundException("id-" + id));
     }
 
     @DeleteMapping("/students/{id}")
