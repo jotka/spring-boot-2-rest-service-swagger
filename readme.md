@@ -1,0 +1,1 @@
+**Spring Boot 2 REST - AWS Example Project for LSD**

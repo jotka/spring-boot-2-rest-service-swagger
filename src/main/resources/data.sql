@@ -1,0 +1,3 @@
+INSERT INTO student VALUES (10001, 'James Bond', 'E1234567');
+
+INSERT INTO student VALUES (10002, 'Batman', 'A1234568');
