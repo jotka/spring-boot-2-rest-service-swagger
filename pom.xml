@@ -91,7 +91,6 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.24.0</version>
 				<configuration>
-					<registry>registry.hub.docker.com</registry>
 					<images>
 						<image>
 							<name>jotka/${artifactId}:${project.version}</name>
