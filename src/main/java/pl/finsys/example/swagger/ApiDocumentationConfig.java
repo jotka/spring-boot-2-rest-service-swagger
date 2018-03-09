@@ -20,7 +20,7 @@ import io.swagger.annotations.*;
         consumes = {"application/json", "application/xml"},
         produces = {"application/json", "application/xml"},
         schemes = {SwaggerDefinition.Scheme.HTTP, SwaggerDefinition.Scheme.HTTPS},
-        externalDocs = @ExternalDocs(value = "Read This For Sure", url = "http://finsys.pl")
+        externalDocs = @ExternalDocs(value = "Read This For Sure", url = "http://www.finsys.pl")
 )
 public interface ApiDocumentationConfig {
 
