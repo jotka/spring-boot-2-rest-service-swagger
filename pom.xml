@@ -89,7 +89,7 @@
                 <configuration>
                     <images>
                         <image>
-                            <name>jotka/${project.artifactId}:${project.version}</name>
+                            <name>jotka/${project.artifactId}</name>
                             <alias>${project.artifactId}</alias>
                             <build>
                                 <from>openjdk:latest</from>

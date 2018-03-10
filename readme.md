@@ -1,6 +1,7 @@
 **Spring Boot 2 REST - AWS Example Project for LSD**
 
-###building the Docker image
+### The REST Service
+####building the Docker image
 
 just `mvn clean install`
 
@@ -8,9 +9,12 @@ or
 
 `mvn docker:build`
 
+`mvn docker:push`
+
+####Running the service locally
 `mvn docker:run`
 
-`mvn docker:push`
+http://localhost:8080/students
 
 
 ###configuring AWS
@@ -57,9 +61,9 @@ or
 `kops edit cluster my-rest-cluster.k8s.local`
 
 ###starting the cluster
-`kops update cluster ${NAME}`
+`kops update cluster ${NAME}` for trial
 
-`kops update cluster ${NAME} --yes`
+`kops update cluster ${NAME} --yes` for real run
 
 `kops validate cluster`
 
@@ -74,7 +78,6 @@ or
 
 `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml`
 
-
 ###accessing the dashboard
 #### getting a token for admin user
 `kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')`
@@ -86,9 +89,17 @@ or
 http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login
 
 ###deploying the application to the cluster
-`kubectl create -f src/main/yaml/3.deployment.yaml`
 
-`kubectl create -f src/main/yaml/4.service.yaml`
+`kubectl run rest-example --replicas=1 --labels="app=rest-example" --image=jotka/rest-example:latest --port=8080`
+
+`kubectl expose deployment rest-example --type=LoadBalancer --name=rest-example-service`
+
+`kubectl get services rest-example-service`
+
+`kubectl describe services rest-example-service`
+
+###accessing the service on the cluster
+http://a125dd595245811e8a7ad02c5a2fc852-2069798364.eu-central-1.elb.amazonaws.com:8080/students
 
 ###removing the cluster
 `kops delete cluster --name my-rest-cluster.k8s.local --yes` 
