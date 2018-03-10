@@ -1,4 +1,4 @@
-**Spring Boot 2 REST - AWS Example Project for LSD**
+## Spring Boot 2 REST - AWS Example Project for LSD
 
 ### The REST Service
 #### building the Docker image
