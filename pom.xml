@@ -83,24 +83,20 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.24.0</version>
                 <configuration>
                     <images>
                         <image>
-                            <name>jotka/${artifactId}:${project.version}</name>
-                            <alias>${artifactId}</alias>
+                            <name>jotka/${project.artifactId}:${project.version}</name>
+                            <alias>${project.artifactId}</alias>
                             <build>
                                 <from>openjdk:latest</from>
                                 <assembly>
                                     <descriptorRef>artifact</descriptorRef>
                                 </assembly>
-                                <cmd>java -jar maven/${artifactId}-${project.version}.jar</cmd>
+                                <cmd>java -jar maven/${project.artifactId}-${project.version}.jar</cmd>
                             </build>
                             <run>
                                 <ports>
