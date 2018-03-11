@@ -20,6 +20,8 @@ http://localhost:8080/students
 
 ### configuring AWS
 
+First, create the admin user using the AWS UI, then login using 
+
 `aws configure`
 
 `aws iam create-group --group-name kops`
